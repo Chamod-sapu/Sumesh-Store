@@ -2,7 +2,7 @@ import React from 'react';
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
-import Logo from '../Images/Logo.png'
+import Logo1 from '../Images/Logo1.jpg'
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
@@ -33,7 +33,7 @@ export default function NavBar() {
                 <div className="flex shrink-0 items-center">
                 <img
                     alt="Your Company"
-                    src={Logo}
+                    src={Logo1}
                     className="h-8 w-auto"
                 />
                 </div>

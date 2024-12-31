@@ -5,7 +5,7 @@ const { Meta } = Card;
 
 function ItemCard() {
   return (
-    <div className='mx-44 mt-10'>
+    <div>
         <Card
             style={{
             width: 280,
