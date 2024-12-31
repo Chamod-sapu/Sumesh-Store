@@ -11,7 +11,7 @@ function App() {
         <NavBar />
       </section>
       <section>
-        <Cart/>
+        <Home/>
       </section>
       <section>
         <Footer />
