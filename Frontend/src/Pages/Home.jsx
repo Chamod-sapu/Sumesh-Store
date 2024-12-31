@@ -63,7 +63,7 @@ function Home() {
             </Swiper>
         </div>
         
-        <div>
+        <div className='mx-40 mt-10'>
             <ItemCard/>
         </div>
 
