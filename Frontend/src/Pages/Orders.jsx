@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Space } from 'antd';
+import { Card, Space, Popover,Button, Rate,Flex} from 'antd';
 
 const tabListNoTitle = [
   {
@@ -15,6 +15,28 @@ const tabListNoTitle = [
     label: 'Delivered',
   },
 ];
+
+const desc = ['Terrible', 'Bad', 'Normal', 'Good', 'Wonderful'];
+
+
+
+const content = () => {
+  const [value, setValue] = useState(0);
+  return(
+    <div>
+      <Flex gap="middle" vertical>
+        <Rate tooltips={desc} onChange={setValue} value={value} />
+        {value ? <span>{desc[value - 1]}</span> : null}
+      </Flex>
+      <br />
+      <Button type="primary" danger className='mt-3 ml-10'>
+        Confirm
+      </Button>
+    </div>
+  )
+}
+
+
 const contentListNoTitle = {
   Pending: <div>
                 <div>
@@ -50,7 +72,7 @@ const contentListNoTitle = {
                     minHeight: 450,
                     }}
                 >
-                    <Card title="Item name" size="small">
+                    <Card title="Item name" size="small" extra={<a className='text-blue-600' href="#">{<Popover content={content} title="Rate Us" trigger="click"><Button>Confirm the delivery</Button></Popover>}</a>}>
                       <div className='flex justify-between'>
                       <img src="" alt="" className='w-12 h-12'/>
                       <div className='flex justify-start'><p>Order# :</p><p>102145123</p></div>
@@ -73,7 +95,7 @@ const contentListNoTitle = {
                     minHeight: 450,
                     }}
                 >
-                    <Card title="Item name" size="small" extra={<a className='text-blue-600' href="#">Confirm the delivery</a>}>
+                    <Card title="Item name" size="small">
                       <div className='flex justify-between'>
                       <img src="" alt="" className='w-12 h-12'/>
                       <div className='flex justify-start'><p>Order# :</p><p>102145123</p></div>
@@ -88,10 +110,12 @@ const contentListNoTitle = {
 
 
 function Orders() {
-  const [activeTabKey2, setActiveTabKey2] = useState('article');
+  const [activeTabKey2, setActiveTabKey2] = useState('Pending');
   const onTab2Change = (key) => {
     setActiveTabKey2(key);
   };
+
+  
   return (
     <div className='w-[1000px]'>
 
