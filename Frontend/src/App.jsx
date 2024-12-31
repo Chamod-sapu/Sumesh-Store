@@ -6,6 +6,7 @@ import Cart from './Pages/Cart'
 import ProductDetails from './Pages/ProductDetails'
 import ProceedToPay from './Pages/ProceedToPay'
 import Orders from './Pages/Orders'
+import Account from './Pages/Account'
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
         <NavBar />
       </section>
       <section>
-        <Orders/>
+        <Account/>
       </section>
       <section>
         <Footer />
