@@ -49,7 +49,7 @@ function Home() {
                 }}
                 modules={[Autoplay, Pagination, Navigation]}
                 className="mySwiper"
-                style={{height: 500, width: 1200, marginTop:20, borderRadius: 10}}
+                style={{height: 500, width: 1200, marginTop:20, borderRadius: 60}}
             >
                 <SwiperSlide><img src={Store1} alt="Store 1" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></SwiperSlide>
                 <SwiperSlide><img src={Store2} alt="Store 2" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></SwiperSlide>

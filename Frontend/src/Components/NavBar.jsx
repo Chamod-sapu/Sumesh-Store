@@ -1,14 +1,13 @@
 import React from 'react';
-import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+import { Disclosure, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
 import Logo1 from '../Images/Logo1.jpg'
 
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
+  { name: 'Home', href: '/', current: false },
+  { name: 'Cart', href: '/cart', current: false },
+  { name: 'Orders', href: '/orders', current: false },
 ]
 
 function classNames(...classes) {
@@ -84,18 +83,10 @@ export default function NavBar() {
               >
                 <MenuItem>
                   <a
-                    href="#"
+                    href="/account"
                     className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                   >
                     Your Profile
-                  </a>
-                </MenuItem>
-                <MenuItem>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
-                  >
-                    Settings
                   </a>
                 </MenuItem>
                 <MenuItem>
