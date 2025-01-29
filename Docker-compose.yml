@@ -1,0 +1,33 @@
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo_container
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+api:
+    build: ./api
+    container_name: api_container
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/test
+    volumes:
+      - ./api:/app
+      - /app/node_modules
+
+client:
+    build: ./client
+    container_name: client_container
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client:/app
+      - /client/node_modules
+
+volumes:
+  mongo_data:

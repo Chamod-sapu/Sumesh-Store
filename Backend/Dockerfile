@@ -1,5 +1,5 @@
 # Using base image from Docker Hub
-FROM node:20-alpine
+FROM node:21.7.1
 
 # Set working directory
 WORKDIR /app
@@ -14,6 +14,6 @@ RUN npm install
 COPY . .
 
 # expose the port to run application
-EXPOSE 5173
+EXPOSE 5000
 
 CMD ["npm" ,"start"]
