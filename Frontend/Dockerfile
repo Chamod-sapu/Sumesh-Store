@@ -1,5 +1,5 @@
 # Using base image from Docker Hub
-FROM node:20-alpine
+FROM node:22.13.1
 
 # Set working directory
 WORKDIR /app
