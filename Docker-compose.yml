@@ -7,9 +7,9 @@ services:
     volumes:
       - mongo_data:/data/db
 
-api:
-    build: ./api
-    container_name: api_container
+  backend:
+    build: ./backend
+    container_name: backend_container
     ports:
       - "5000:5000"
     depends_on:
@@ -17,17 +17,17 @@ api:
     environment:
       - MONGO_URL=mongodb://mongo:27017/test
     volumes:
-      - ./api:/app
-      - /app/node_modules
+      - ./backend:/app
+      - /backend/node_modules
 
-client:
-    build: ./client
-    container_name: client_container
+  frontend:
+    build: ./frontend
+    container_name: frontend_container
     ports:
       - "5173:5173"
     volumes:
-      - ./client:/app
-      - /client/node_modules
+      - ./frontend:/app
+      - /frontend/node_modules
 
 volumes:
   mongo_data:

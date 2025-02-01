@@ -1,19 +1,19 @@
-# Using base image from Docker Hub
-FROM node:22.13.1
+# Use a valid Node.js version
+FROM node:20
 
 # Set working directory
 WORKDIR /app
 
-# Copy package.json file
-COPY package.json ./
+# Copy package.json and package-lock.json files
+COPY package*.json ./
 
-# installing dependencies
+# Install dependencies
 RUN npm install
 
-# copy all files
+# Copy all files
 COPY . .
 
-# expose the port to run application
+# Expose the port to run application
 EXPOSE 5173
 
-CMD ["npm" ,"run","dev"]
+CMD ["npm", "run", "dev"]
