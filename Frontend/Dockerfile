@@ -7,8 +7,9 @@ WORKDIR /app
 # Copy package.json and package-lock.json files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
+# Clean install to fix Rollup issue
+RUN rm -rf node_modules package-lock.json && \
+    npm install
 
 # Copy all files
 COPY . .

@@ -6,7 +6,7 @@ const dotenv = require("dotenv");
 const path = require("path");
 require("dotenv").config();
 
-const PORT = process.env.PORT || 8080; 
+const PORT = process.env.PORT || 6002; 
 
 const app = express();
 app.use(express.json());
@@ -31,6 +31,3 @@ const itemRouter = require("./Routes/ItemRoutes.js");
 
 app.use("/Item", itemRouter);
 
-app.listen(PORT, () => {
-  console.log(`Server is up and running on port number ${PORT}`);
-});

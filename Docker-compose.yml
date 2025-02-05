@@ -11,14 +11,14 @@ services:
     build: ./backend
     container_name: backend_container
     ports:
-      - "5000:5000"
+      - "5000:6000"
     depends_on:
       - mongo
     environment:
-      - MONGO_URL=mongodb://mongo:27017/test
+      - MONGO_URL=mongodb://mongo:27017/Sumesh_Store
     volumes:
       - ./backend:/app
-      - /backend/node_modules
+      - /app/node_modules  # Fixed path
 
   frontend:
     build: ./frontend
@@ -27,7 +27,7 @@ services:
       - "5173:5173"
     volumes:
       - ./frontend:/app
-      - /frontend/node_modules
+      - /app/node_modules  # Fixed path
 
 volumes:
   mongo_data:
