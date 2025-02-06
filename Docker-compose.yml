@@ -11,7 +11,7 @@ services:
     build: ./backend
     container_name: backend_container
     ports:
-      - "5000:6000"
+      - "5000:6001"
     depends_on:
       - mongo
     environment:

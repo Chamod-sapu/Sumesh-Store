@@ -1,7 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Input,Button } from 'antd';
 import ItemCard from '../Components/ItemCard';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import axios from "axios";
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -20,7 +21,22 @@ const onSearch = (value, _e, info) => console.log(info?.source, value);
 
 function Home() {
 
-        
+const [item, setItem] = useState([]);
+
+
+useEffect(() => {
+    function getItems() {
+        axios.get(`http://localhost:5000/Item/`).then((res) => {
+            setItem(res.data);
+            console.log(res.data);
+        }).catch((err) => {
+            alert(err.message);
+        });
+    }
+    getItems();
+}, []);
+
+console.log(item);
 
   return (
     <div >
@@ -63,8 +79,19 @@ function Home() {
             </Swiper>
         </div>
         
-        <div className='mx-40 mt-10'>
-            <ItemCard/>
+        <div className='mx-40 mt-10 grid grid-cols-4 gap-10'>
+            {
+                item.map((el) => {
+                    return (
+                        <ItemCard 
+                            key={el._id}
+                            nm={el.name}
+                            prc={el.price}
+                            //img={el.image}
+                        />
+                    );
+                })
+            }
         </div>
 
     </div>

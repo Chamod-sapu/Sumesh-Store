@@ -3,7 +3,9 @@ import { ShoppingCartOutlined } from '@ant-design/icons';
 import { Card } from 'antd';
 const { Meta } = Card;
 
-function ItemCard() {
+function ItemCard({nm, prc, img}) {
+
+  
   return (
     <div>
         <Card
@@ -21,8 +23,8 @@ function ItemCard() {
             ]}
         >
             <Meta
-            title="Card title"
-            description="This is the description"
+            title={nm}
+            description={prc}
             />
         </Card>
     </div>

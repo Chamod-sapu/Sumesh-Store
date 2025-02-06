@@ -6,7 +6,7 @@ const dotenv = require("dotenv");
 const path = require("path");
 require("dotenv").config();
 
-const PORT = process.env.PORT || 6002; 
+const PORT = process.env.PORT || 6001; 
 
 const app = express();
 app.use(express.json());
@@ -28,6 +28,8 @@ connection.once("open", () => {
 });
 
 const itemRouter = require("./Routes/ItemRoutes.js");
+const orderRouter = require("./Routes/OrderRoutes.js");
 
 app.use("/Item", itemRouter);
+app.use("/Order", orderRouter);
 
