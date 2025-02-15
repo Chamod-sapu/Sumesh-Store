@@ -16,7 +16,7 @@ function CartCard() {
                 >
                     <Card title="Item name" size="small">
                     <p>Card content</p>
-                    <p>Card content</p>
+                    <p>Price</p>
                     </Card>
                 </Space>
             </div>
