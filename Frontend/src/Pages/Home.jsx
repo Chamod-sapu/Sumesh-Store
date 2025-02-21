@@ -14,6 +14,7 @@ import Store1 from '../Images/store1.jpg';
 import Store2 from '../Images/store2.jpg';
 
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { useNavigate } from 'react-router-dom';
 
 const { Search } = Input;
 
@@ -22,6 +23,8 @@ const onSearch = (value, _e, info) => console.log(info?.source, value);
 function Home() {
 
 const [item, setItem] = useState([]);
+
+const navigate = useNavigate();
 
 
 useEffect(() => {
@@ -37,6 +40,12 @@ useEffect(() => {
 }, []);
 
 console.log(item);
+
+const handleItemClick = async (itemId) => {
+    setGid(itemId);
+    localStorage.setItem('IId', itemId);
+    navigate("/productdetails");
+  };
 
   return (
     <div >
@@ -88,6 +97,7 @@ console.log(item);
                             nm={el.name}
                             prc={el.price}
                             //img={el.image}
+                            onClick={() => handleItemClick(el._id)}
                         />
                     );
                 })
