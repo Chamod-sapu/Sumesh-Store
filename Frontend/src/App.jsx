@@ -17,14 +17,13 @@ function App() {
           <NavBar />
         </section>
         <section className='mt-20'>
-{/*         <Routes>
+{        <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/account" element={<Account />} />
           <Route path="/productdetails" element={<ProductDetails />} /> 
-        </Routes> */}
-        <ProductDetails/>
+        </Routes>}
         </section>
         <section>
           <Footer />

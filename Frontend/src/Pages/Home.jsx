@@ -96,7 +96,7 @@ const handleItemClick = async (itemId) => {
                             key={el._id}
                             nm={el.name}
                             prc={el.price}
-                            //img={el.image}
+
                             onClick={() => handleItemClick(el._id)}
                         />
                     );
