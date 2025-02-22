@@ -58,7 +58,7 @@ function ProceedToPay() {
         </div>
         <div className='mt-10 w-[380px]'>
             <Card type="inner" title="Billing Details">
-                <p className='font-bold text-lg'>Order Summary</p>
+                <p className='font-bold text-lg'>Order summary</p>
                 <br />
                 <div className='flex justify-between'><p>Cost for selected items : </p><p>Rs.600</p></div>
                 <br />
