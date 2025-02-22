@@ -24,7 +24,6 @@ function App() {
           <Route path="/account" element={<Account />} />
           <Route path="/productdetails" element={<ProductDetails />} /> 
         </Routes>
-        {/* <ProductDetails/> */}
         </section>
         <section>
           <Footer />
