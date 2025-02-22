@@ -8,7 +8,7 @@ function ItemCard({nm, prc, img, onClick}) {
 
   return (
     <div>
-      <a href="">
+      <a href="" onClick={onClick}>
         <Card
             style={{
             width: 280,
