@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 let User = require("../Models/UserModel.js");
 
-// Create a User
+// Create a User route 
 router.route('/add').post(async (req, res) => {
     const {username, email, address,phoneNumber} = req.body;
     
@@ -13,6 +13,7 @@ router.route('/add').post(async (req, res) => {
         email, 
         address, 
         phoneNumber
+        //add password and role
     });
 
     newUser.save()
@@ -23,7 +24,7 @@ router.route('/add').post(async (req, res) => {
         });
 });
 
-// Fetch Users
+// Fetch Users route
 router.route('/').get(async (req, res) => {
     User.find()
         .then(users => res.json(users)) // Note the variable name 'users'
@@ -70,6 +71,7 @@ router.route('/update/:id').put(async (req, res) => {
         email, 
         address, 
         phoneNumber
+        //add password and role
     };
 
     User.findByIdAndUpdate(id, updateUser)
