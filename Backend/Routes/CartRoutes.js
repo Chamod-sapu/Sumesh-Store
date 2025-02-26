@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 let Cart = require("../Models/CartModel.js");
 
-// Create a Cart item
+// Create a Cart item(updated)
 
 router.route('/add').post(async (req, res) => {
     const {name, itemId, price, quantity, userID} = req.body;

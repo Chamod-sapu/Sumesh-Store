@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Connect to MongoDB
+// Connect to MongoDB database
 mongoose
   .connect(process.env.MONGODB_URL)
   .then(() => {

@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema;
 
+//updated
 const cartSchema = new Schema({
     name : {
         type: String,

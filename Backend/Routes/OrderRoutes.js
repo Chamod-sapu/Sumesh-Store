@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 let Order = require("../Models/OrderModel.js");
 
-// Create an Order
+// Create an Order (updated)
 router.route('/add').post(async (req, res) => {
     const {orderNO, name, quantity, address, price,status} = req.body;
     
