@@ -23,11 +23,17 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    // role : {
-    //     type: String,
-    //     required: false,
-    //     default: 'customer'
-    // }
+
+    //add password and role
+    password : {
+        type: String,
+        required: false
+    },
+    role : {
+        type: String,
+        required: false
+    },
+
 
 })
 

@@ -3,8 +3,10 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const path = require('path');
 let User = require("../Models/UserModel.js");
+
 const bcrypt = require('bcrypt');
 const {login }= require('../Controllers/loginController.js');
+
 // Create a User
 router.route('/add').post(async (req, res) => {
     try {
@@ -27,7 +29,8 @@ router.route('/add').post(async (req, res) => {
     }
 });
 
-// Fetch Users
+
+// Fetch Users route
 router.route('/').get(async (req, res) => {
     User.find()
         .then(users => res.json(users)) // Note the variable name 'users'
@@ -63,7 +66,7 @@ router.route('/delete/:id').delete(async (req, res) => {
     }
 });
 
-/// Update a User
+// Update a User
 router.route('/update/:id').put(async (req, res) => {
     const id = req.params.id;
     const { name, email, address, phoneNumber } = req.body;
