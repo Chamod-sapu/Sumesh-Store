@@ -60,7 +60,7 @@ router.route('/update/:id').put(async (req, res) => {
         price, 
         quantity, 
         userID
-    };
+    }; 
 
     try {
         await Cart.findByIdAndUpdate(id, updateItem);
