@@ -3,24 +3,28 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const path = require('path');
 let User = require("../Models/UserModel.js");
-
+const bcrypt = require('bcrypt');
+const {login }= require('../Controllers/loginController.js');
 // Create a User
 router.route('/add').post(async (req, res) => {
-    const {username, email, address,phoneNumber} = req.body;
-    
-    const newUser = new User({
-        username, 
-        email, 
-        address, 
-        phoneNumber
-    });
+    try {
+        const { name, email, address, phoneNumber, password } = req.body;
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-    newUser.save()
-        .then(() => res.json('User Added Successfully'))
-        .catch((err) => {
-            console.log(err);
-            res.status(400).json('Error: ' + err);
+        const newUser = new User({
+            name,
+            email,
+            address,
+            phoneNumber,
+            password: hashedPassword,
         });
+
+        await newUser.save();
+        res.json('User Added Successfully');
+    } catch (err) {
+        console.log(err);
+        res.status(400).json('Error: ' + err);
+    }
 });
 
 // Fetch Users
@@ -59,25 +63,48 @@ router.route('/delete/:id').delete(async (req, res) => {
     }
 });
 
-// Update a User
+/// Update a User
 router.route('/update/:id').put(async (req, res) => {
-    let id = req.params.id;
+    const id = req.params.id;
+    const { name, email, address, phoneNumber } = req.body;
+  
+    const updateUser = { name, email, address, phoneNumber };
+  
+    try {
+      await User.findByIdAndUpdate(id, updateUser);
+      res.status(200).json('User updated successfully');
+    } catch (err) {
+      res.status(400).json('Error: ' + err);
+    }
+  });
+  
+  // Change Password
+  router.route('/change-password/:id').put(async (req, res) => {
+    const id = req.params.id;
+    const { currentPassword, newPassword } = req.body;
+  
+    try {
+      const user = await User.findById(id);
+      if (!user) {
+        return res.status(404).json('User not found');
+      }
+  
+      const isPasswordValid = await bcrypt.compare(currentPassword, user.password);
+      if (!isPasswordValid) {
+        return res.status(400).json('Current password is incorrect');
+      }
+  
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+      user.password = hashedPassword;
+      await user.save();
+  
+      res.status(200).json('Password changed successfully');
+    } catch (err) {
+      res.status(400).json('Error: ' + err);
+    }
+  });
 
-    const {username, email, address, phoneNumber} = req.body;
-
-    const updateUser = {
-        username, 
-        email, 
-        address, 
-        phoneNumber
-    };
-
-    User.findByIdAndUpdate(id, updateUser)
-        .then(() => res.json('User updated successfully'))
-        .catch((err) => {
-            console.log(err);
-            res.status(400).json('Error: ' + err);
-        });
-});
+// Login a User
+router.post('/login', login);
 
 module.exports = router;

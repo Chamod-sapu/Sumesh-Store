@@ -35,6 +35,18 @@ router.route('/').get(async (req, res) => {
         });
 });
 
+// Fetch a specific Item
+router.route('/:id').get(async (req, res) => {
+    let id = req.params.id;
+
+    Item.findById(id)   
+        .then(item => res.json(item))   
+        .catch((err) => {
+            console.log(err);
+            res.status(400).json('Error: ' + err);
+        });  
+});    
+
 // Delete an Item
 router.route('/delete/:id').delete(async (req, res) => { 
     const itemId = req.params.id;

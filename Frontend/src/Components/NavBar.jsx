@@ -2,21 +2,84 @@ import React from 'react';
 import { Disclosure, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
+import { Tabs, Button, Modal, Avatar, Space } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
+import Login from '../Components/Login';
+import Signup from '../Components/Signup';
+import { useState } from 'react';
+
 import Logo1 from '../Images/Logo1.jpg'
+import { useNavigate } from 'react-router-dom';
 
-const navigation = [
-  { name: 'Home', href: '/', current: false },
-  { name: 'Cart', href: '/cart', current: false },
-  { name: 'Orders', href: '/orders', current: false },
-]
 
+  
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function NavBar() {
+
+  const token = localStorage.getItem('token');
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    navigate('/');
+  }
+
+  const [open, setOpen] = useState(false);
+  const [activeKey, setActiveKey] = useState("1");
+
+  const showModal = () => {
+      setOpen(true);
+  };
+
+  const handleOk = (e) => {
+      console.log(e);
+      setOpen(false);
+  };
+
+  const handleCancel = (e) => {
+      console.log(e);
+      setOpen(false);
+  };
+
+  const onChange = (key) => {
+      setActiveKey(key);
+  };
+
+  const navigation = [
+
+    { name: 'Home', href: '/', current: false },
+    { name: 'Cart', href: '/cart', current: false },
+    { name: 'Orders', href: '/orders', current: false },
+  ]
+  
+  const navigation1 = [
+  
+    { name: 'Home', href: '/', current: false },
+    { name: 'Cart', current: false, onclick: {showModal} },
+    { name: 'Orders',current: false, onclick: {showModal}  },
+  ]
+
+  const items = [
+        {
+            key: "1",
+            label: "Login",
+            children: <Login />
+        },
+        {
+            key: "2",
+            label: "Signup",
+            children: <Signup />
+        }
+    ];
+
+  const [hover, setHover] = useState(false);
+
   return (
-    <Disclosure as="nav" className="bg-orange-400 ">
+    <Disclosure as="nav" className="bg-orange-600 ">
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -38,45 +101,98 @@ export default function NavBar() {
                 </div>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
-                {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    aria-current={item.current ? 'page' : undefined}
-                    className={classNames(
-                      item.current ? 'bg-orange-600 text-white' : 'text-white hover:bg-orange-500 hover:text-white',
-                      'rounded-md px-3 py-2 text-sm font-medium',
-                    )}
-                  >
-                    {item.name}
-                  </a>
-                ))}
+                {token ?
+                  <div className='mt-1'>
+                  {navigation.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      aria-current={item.current ? 'page' : undefined}
+                      className={classNames(
+                        item.current ? 'bg-orange-600 text-white' : 'text-white hover:bg-[#b91c1c] hover:text-white',
+                        'rounded-md px-3 py-2 text-sm font-medium',
+                      )}
+                    >
+                      {item.name}
+                    </a>
+                  ))}
+                </div> :
+                  <div className='mt-1'>
+                    {navigation1.map((item) => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        aria-current={item.current ? 'page' : undefined}
+                        className={classNames(
+                          item.current ? 'bg-orange-600 text-white' : 'text-white hover:bg-[#b91c1c] hover:text-white',
+                          'rounded-md px-3 py-2 text-sm font-medium',
+                        )}
+                      >
+                        {item.name}
+                      </a>
+                    ))}
+                  </div>
+                  }
               </div>
             </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <button
-              type="button"
-              className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
+            { token ?
+              <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
+              <span class="absolute -inset-1.5"></span>
+              <span class="sr-only">View notifications</span>
+              <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+              </svg>
+            </button> : 
+
+            <Button type="primary" onClick={showModal}  onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
+              style={{
+                backgroundColor: hover ? '#dc2626' : '#b91c1c', // Red shades from Tailwind palette
+                borderColor: hover ? '#dc2626' : '#b91c1c',
+            }}>
+                Login
+            </Button>}
+            <Modal
+                title="User Authentication"
+                open={open}
+                onCancel={handleCancel}
+                footer={null}
+                width={500}
+                closable={false}
             >
-              <span className="absolute -inset-1.5" />
-              <span className="sr-only">View notifications</span>
-              <BellIcon aria-hidden="true" className="size-6" />
-            </button>
+                <Tabs
+                    activeKey={activeKey}
+                    onChange={onChange}
+                    defaultActiveKey="1"
+                    centered
+                    items={items}
+                />
+            </Modal>            
 
             {/* Profile dropdown */}
             <Menu as="div" className="relative ml-3">
-              <div>
+              {
+                token? 
+                <div>
                 <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
                   <span className="absolute -inset-1.5" />
-                  <span className="sr-only">Open user menu</span>
-                  <img
-                    alt=""
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    className="size-8 rounded-full"
-                  />
+                  <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=1" /> 
                 </MenuButton>
-              </div>
+                </div>
+                  : 
+                <div>
+                  <span className="absolute -inset-1.5" />
+                  <Avatar
+                    style={{
+                      backgroundColor: '#b91c1c',
+                      borderColor: '#ffffff',
+                      borderWidth: 2,
+                    }}
+                    icon={<UserOutlined />}
+                  />
+                </div>
+              }
               <MenuItems
                 transition
                 className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
@@ -93,6 +209,7 @@ export default function NavBar() {
                   <a
                     href="#"
                     className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                    onClick={handleLogout}
                   >
                     Sign out
                   </a>

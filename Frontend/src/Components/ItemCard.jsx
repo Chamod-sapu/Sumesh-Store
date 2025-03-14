@@ -20,12 +20,13 @@ function ItemCard({nm, prc, img, onClick}) {
             />
             }
             actions={[
-            <ShoppingCartOutlined key="Add to Cart" onClick={onClick}/>,
+            <ShoppingCartOutlined key="Add to Cart" />,
             ]}
         >
             <Meta
             title={nm}
-            description={prc}
+            description={`Rs. ${prc}`
+                          }
             />
         </Card>
 

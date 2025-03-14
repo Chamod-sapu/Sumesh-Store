@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    username : {
+    name : {
         type: String,
         required: false
     },
@@ -17,8 +17,18 @@ const userSchema = new Schema({
     },
     phoneNumber : {
         type: String,
-        required: false
+        required: true
     },
+    password : {
+        type: String,
+        required: true
+    },
+    // role : {
+    //     type: String,
+    //     required: false,
+    //     default: 'customer'
+    // }
+
 })
 
 const User = mongoose.model('User', userSchema);
