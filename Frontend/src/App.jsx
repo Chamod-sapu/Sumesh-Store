@@ -8,6 +8,9 @@ import ProceedToPay from './Pages/ProceedToPay'
 import Orders from './Pages/Orders'
 import Account from './Pages/Account'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import LoginAndSignup from './Pages/LoginAndSignup'
+import Login from './Components/Login'
+import Signup from './Components/Signup'
 
 function App() {
   return (
@@ -17,13 +20,19 @@ function App() {
           <NavBar />
         </section>
         <section className='mt-20'>
-{        <Routes>
+        <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/account" element={<Account />} />
           <Route path="/productdetails" element={<ProductDetails />} /> 
-        </Routes>}
+
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/proceedtopay" element={<ProceedToPay />} />
+        </Routes>
+
+
         </section>
         <section>
           <Footer />
