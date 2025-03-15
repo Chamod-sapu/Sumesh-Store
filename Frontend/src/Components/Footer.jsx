@@ -24,7 +24,7 @@ function Footer() {
             <div className="w-full md:w-1/3">
               <h5 className="font-bold text-lg mb-2">Contact Us</h5>
               <p className="text-sm">
-                Email: info@example.com <br />
+                Email: info@example.com<br />
                 Phone: +123 456 7890
               </p>
             </div>
