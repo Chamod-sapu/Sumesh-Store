@@ -35,7 +35,7 @@ function LoginAndSignup() {
         },
         {
             key: "2",
-            label: "Signup",
+            label: "Signup", 
             children: <Signup />
         }
     ];
