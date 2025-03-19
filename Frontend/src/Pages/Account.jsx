@@ -65,12 +65,12 @@ function Account() {
   };
 
   return (
-    <div className='min-h-[450px]'>
-      <div className='w-[1150px] ml-44 mt-10'>
+    <div className='min-h-[450px] px-4 sm:px-6 md:px-8 lg:px-12'>
+      <div className='w-full sm:w-full md:w-full lg:w-4/5 xl:w-3/4 mx-auto mt-10'>
         <Descriptions bordered title="User Info" items={items} />
       </div>
-      <div className='w-[1350px] ml-44 mt-10'>
-        <Button type="primary" danger className='ml-44 mr-5' onClick={showModal}>
+      <div className='w-full flex flex-col sm:flex-row justify-center mt-10 gap-4'>
+        <Button type="primary" danger onClick={showModal}>
           Edit Profile
         </Button>
         <Modal

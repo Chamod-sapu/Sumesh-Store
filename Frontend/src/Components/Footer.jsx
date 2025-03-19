@@ -15,10 +15,10 @@ function Footer() {
             <div className="w-full md:w-1/3 mb-6 md:mb-0 pl-16">
               <h5 className="font-bold text-lg mb-2">Quick Links</h5>
               <ul className="text-sm">
-                <li><a href="#" className="hover:underline">Home</a></li>
-                <li><a href="#" className="hover:underline">About</a></li>
-                <li><a href="#" className="hover:underline">Services</a></li>
-                <li><a href="#" className="hover:underline">Contact</a></li>
+                <li><a href="/" className="hover:underline">Home</a></li>
+                <li><a href="/cart" className="hover:underline">Cart</a></li>
+                <li><a href="/about" className="hover:underline">About</a></li>
+                <li><a href="/contact" className="hover:underline">Contact</a></li>
               </ul>
             </div>
             <div className="w-full md:w-1/3">
@@ -34,6 +34,7 @@ function Footer() {
           </div>
         </div>
       </footer>
+
 
     </div>
   )

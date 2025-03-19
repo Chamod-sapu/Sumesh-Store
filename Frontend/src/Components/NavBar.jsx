@@ -54,6 +54,7 @@ export default function NavBar() {
     { name: 'Home', href: '/', current: false },
     { name: 'Cart', href: '/cart', current: false },
     { name: 'Orders', href: '/orders', current: false },
+    { name: 'Contact us', href: '/contact', current: false },
   ]
   
   const navigation1 = [

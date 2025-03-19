@@ -40,13 +40,13 @@ function CartCard({ cartItems = [], loading = true, onCartUpdate, selectedItems 
   };
 
   return (
-    <div>
+    <div className="w-full px-2 sm:px-3 md:px-4">
       <Space
         direction="vertical"
         size="middle"
         style={{
           display: 'flex',
-          width: 800,
+          width: '100%',
           minHeight: 500,
         }}
       >
@@ -58,6 +58,7 @@ function CartCard({ cartItems = [], loading = true, onCartUpdate, selectedItems 
               key={item._id}
               title={item.name}
               size="small"
+              className="w-full"
               extra={
                 <Button 
                   type="text" 
@@ -68,22 +69,22 @@ function CartCard({ cartItems = [], loading = true, onCartUpdate, selectedItems 
                 </Button>
               }
             >
-              <div className="flex justify-between items-center">
-                <input 
-                  type="checkbox" 
-                  className="w-5 h-5 cursor-pointer"
-                  checked={selectedItems.includes(item._id)}
-                  onChange={(e) => onSelectItem(item._id, e.target.checked)}
-                />
-                <img 
-                  src={`image/img1.jpg`} // Default image or you can use a placeholder
-                  alt={item.name} 
-                  className='w-16 h-16 object-cover rounded' 
-                />
-                <p>
-                  <strong>Product ID:</strong> {item.itemId}
-                </p>
-                <div>
+              <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <div className="flex items-center space-x-4">
+                  <input 
+                    type="checkbox" 
+                    className="w-4 h-4 sm:w-5 sm:h-5 cursor-pointer"
+                    checked={selectedItems.includes(item._id)}
+                    onChange={(e) => onSelectItem(item._id, e.target.checked)}
+                  />
+                  <img 
+                    src={`image/img1.jpg`}
+                    alt={item.name} 
+                    className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded" 
+                  />
+                </div>
+
+                <div className="flex flex-col items-center sm:items-start">
                   <strong>Quantity:</strong>
                   <div className="flex items-center mt-1">
                     <Button 
@@ -102,12 +103,15 @@ function CartCard({ cartItems = [], loading = true, onCartUpdate, selectedItems 
                     </Button>
                   </div>
                 </div>
-                <p>
-                  <strong>Price:</strong> Rs.{item.price}
-                </p>
-                <p>
-                  <strong>Total:</strong> Rs.{parseInt(item.price) * parseInt(item.quantity)}
-                </p>
+
+                <div className="flex flex-col sm:flex-row gap-2 md:gap-4">
+                  <p className="text-center sm:text-left text-sm md:text-base">
+                    <strong>Price:</strong> Rs.{item.price}
+                  </p>
+                  <p className="text-center sm:text-left text-sm md:text-base">
+                    <strong>Total:</strong> Rs.{parseInt(item.price) * parseInt(item.quantity)}
+                  </p>
+                </div>
               </div>
             </Card>
           ))
