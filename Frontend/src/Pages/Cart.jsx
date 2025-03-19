@@ -74,20 +74,20 @@ function Cart() {
   };
 
   return (
-    <div className='mx-40 mt-10 flex justify-between'>
-      <div>
+    <div className='px-4 sm:px-6 md:px-8 lg:mx-10 xl:mx-40 mt-4 sm:mt-6 md:mt-10 flex flex-col lg:flex-row lg:justify-between gap-6'>
+      <div className="w-full lg:w-2/3">
         <div className="mb-4 flex items-center">
           <input 
             type="checkbox" 
             id="selectAll"
-            className="w-5 h-5 cursor-pointer mr-2"
+            className="w-4 h-4 sm:w-5 sm:h-5 cursor-pointer mr-2"
             checked={selectedItems.length > 0 && selectedItems.length === cartItems.length}
             onChange={(e) => handleSelectAll(e.target.checked)}
           />
-          <label htmlFor="selectAll" className="cursor-pointer">
+          <label htmlFor="selectAll" className="cursor-pointer text-sm sm:text-base">
             Select All Items
           </label>
-          <span className="ml-4 text-gray-500">
+          <span className="ml-2 sm:ml-4 text-xs sm:text-sm text-gray-500">
             {selectedItems.length} of {cartItems.length} item(s) selected
           </span>
         </div>
@@ -101,12 +101,13 @@ function Cart() {
         />
       </div>
 
-      <div>
+      <div className="w-full lg:w-1/3">
         <Card
           title="Billing Details"
           bordered={false}
           style={{
-            width: 350,
+            width: '100%',
+            maxWidth: '100%',
           }}
         >
           {selectedItems.length === 0 ? (
@@ -121,7 +122,7 @@ function Cart() {
             <p>Rs. {calculateShipping()}</p>
           </div>
           <Divider />
-          <div className="flex justify-between mb-4 font-bold text-lg">
+          <div className="flex justify-between mb-4 font-bold text-sm sm:text-lg">
             <p>Total:</p>
             <p>Rs. {calculateTotal()}</p>
           </div>

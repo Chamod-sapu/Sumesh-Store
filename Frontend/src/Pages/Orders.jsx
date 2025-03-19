@@ -174,12 +174,12 @@ function Orders() {
   };
 
   return (
-    <div className="w-[1000px]">
+    <div className="lg:ml-60   w-full sm:w-[600px] md:w-[800px] lg:w-[1000px]">
       <Card
-        className="mt-10"
+        className="mt-5 sm:mt-8 md:mt-10 mx-auto"
         style={{
           width: '100%',
-          marginLeft: '250px',
+          marginLeft: '0',
         }}
         tabList={tabList}
         activeTabKey={activeTabKey}
@@ -191,6 +191,7 @@ function Orders() {
         {contentList[activeTabKey]}
       </Card>
     </div>
+
   );
 }
 

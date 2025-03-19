@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Card, Rate, Button, Form, InputNumber, Badge, Descriptions, message } from 'antd';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 export default function ProductDetails() {
+  const navigate = useNavigate(); // Initialize useNavigate
   const carouselRef = useRef(null);
   const sliderRef = useRef(null);
   const thumbnailRef = useRef(null);
@@ -97,6 +99,30 @@ export default function ProductDetails() {
       });
   };
 
+  // Function to handle "Buy Now" button click
+  const handleBuyNow = () => {
+    // Calculate total price (product price * quantity + delivery charge)
+    const itemPrice = parseFloat(product.price) * quantity;
+    const totalPrice = itemPrice + 250; // Adding Rs.250 for delivery
+
+    // Create selected item object
+    const selectedItem = {
+      name: product.name,
+      itemId: productID,
+      price: product.price,
+      quantity: quantity,
+      totalItemPrice: itemPrice
+    };
+
+    // Navigate to ProceedToPay with the necessary data
+    navigate('/proceedtopay', { 
+      state: { 
+        totalPrice: totalPrice,
+        selectedItems: [selectedItem] 
+      } 
+    });
+  };
+
   const items = [
     { key: '1', label: 'Product', children: product.productName },
     { key: '2', label: 'Billing Mode', children: 'Online Payment' },
@@ -126,91 +152,97 @@ export default function ProductDetails() {
   ];
 
   return (
-    <div className="w-[1350px]">
-      <div className="flex justify-start mt-10 w-[1350px]">
-        <div className="ml-52 w-[450px] relative" ref={carouselRef}>
-          {/* Slider Section */}
-          <div className="list flex overflow-hidden" ref={sliderRef}>
-            {[1, 2, 3, 4].map((index) => (
-              <div className="item flex-shrink-0 w-full flex items-center justify-center relative" key={index}>
-                <img
-                  className="w-[450px] h-96 border border-black rounded-xl object-cover"
-                  src={`image/img${index}.jpg`}
-                  alt={`Slide ${index}`}
-                />
-              </div>
-            ))}
+<div className="w-full lg:w-[1350px]">
+  <div className="flex flex-wrap justify-center lg:justify-start mt-10 w-full lg:w-[1350px]">
+    <div className="lg:ml-52 w-full lg:w-[450px] relative" ref={carouselRef}>
+      {/* Slider Section */}
+      <div className="list flex overflow-hidden" ref={sliderRef}>
+        {[1, 2, 3, 4].map((index) => (
+          <div className="item flex-shrink-0 w-full flex items-center justify-center relative" key={index}>
+            <img
+              className="w-full lg:w-[450px] h-48 lg:h-96 border border-black rounded-xl object-cover"
+              src={`image/img${index}.jpg`}
+              alt={`Slide ${index}`}
+            />
           </div>
-
-          {/* Thumbnail Section */}
-          <div className="thumbnail flex justify-center mt-4" ref={thumbnailRef}>
-            {[1, 2, 3, 4].map((index) => (
-              <div className="item w-24 h-24 flex-shrink-0 m-2 overflow-hidden border border-gray-300 rounded-xl" key={index}>
-                <img
-                  className="w-full h-full object-cover"
-                  src={`image/img${index}.jpg`}
-                  alt={`Thumbnail ${index}`}
-                />
-              </div>
-            ))}
-          </div>
-
-          {/* Arrows */}
-          <div className="arrows flex justify-between absolute top-44 w-full px-4">
-            <button id="prev" ref={prevButtonRef} className="bg-gray-800 text-white w-10 h-10 flex items-center justify-center rounded-full focus:outline-none">
-              &lt;
-            </button>
-            <button id="next" ref={nextButtonRef} className="bg-gray-800 text-white w-10 h-10 flex items-center justify-center rounded-full focus:outline-none">
-              &gt;
-            </button>
-          </div>
-        </div>
-
-        <div>
-          {/* Update the Card title with the item name from product array */}
-          <Card type="inner" title={product.name} className="w-[450px] ml-20">
-            <div className="flex justify-start font-bold text-4xl text-orange-500">
-              <p>Rs.</p>
-              <p>{product.price}</p>
-            </div>
-            <div className="flex justify-start mt-7">
-              <p className="font-bold">Brand Name:</p>
-              <p>{product.brandName}</p>
-            </div>
-            <hr className="border"/>
-            <div className="mt-4 mb-2">
-              <p className="mb-2">Ratings:</p>
-              <Rate disabled defaultValue={product.rating} />
-            </div>
-            <hr className="border"/>
-            <div className="mt-4">
-              <Form.Item label="Quantity">
-                <Form.Item name="input-number" noStyle>
-                  <InputNumber 
-                    min={1} 
-                    max={100} 
-                    defaultValue={1} 
-                    onChange={(value) => setQuantity(value)} 
-                  />
-                </Form.Item>
-              </Form.Item>
-              <Button className="mr-4" color="success" variant="solid">
-                Buy Now
-              </Button>
-              <Button 
-                color="danger" 
-                variant="solid"
-                onClick={addToCart}
-              >
-                Add to Cart
-              </Button>
-            </div>
-          </Card>
-        </div>
+        ))}
       </div>
-      <div className="ml-52 mt-7">
-        <Descriptions title="Item Description" bordered items={items} />
+
+      {/* Thumbnail Section */}
+      <div className="thumbnail flex justify-center mt-4" ref={thumbnailRef}>
+        {[1, 2, 3, 4].map((index) => (
+          <div className="item w-16 h-16 lg:w-24 lg:h-24 flex-shrink-0 m-1 lg:m-2 overflow-hidden border border-gray-300 rounded-xl" key={index}>
+            <img
+              className="w-full h-full object-cover"
+              src={`image/img${index}.jpg`}
+              alt={`Thumbnail ${index}`}
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Arrows */}
+      <div className="arrows flex justify-between absolute top-20 lg:top-44 w-full px-4">
+        <button id="prev" ref={prevButtonRef} className="bg-gray-800 text-white w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center rounded-full focus:outline-none">
+          &lt;
+        </button>
+        <button id="next" ref={nextButtonRef} className="bg-gray-800 text-white w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center rounded-full focus:outline-none">
+          &gt;
+        </button>
       </div>
     </div>
+
+    <div className="mt-8 lg:mt-0 w-full lg:w-auto">
+      {/* Update the Card title with the item name from product array */}
+      <Card type="inner" title={product.name} className="w-full lg:w-[450px] mx-auto lg:ml-20">
+        <div className="flex justify-start font-bold text-2xl lg:text-4xl text-orange-500">
+          <p>Rs.</p>
+          <p>{product.price}</p>
+        </div>
+        <div className="flex justify-start mt-4 lg:mt-7">
+          <p className="font-bold">Brand Name:</p>
+          <p>{product.brandName}</p>
+        </div>
+        <hr className="border"/>
+        <div className="mt-4 mb-2">
+          <p className="mb-2">Ratings:</p>
+          <Rate disabled defaultValue={product.rating} />
+        </div>
+        <hr className="border"/>
+        <div className="mt-4">
+          <Form.Item label="Quantity">
+            <Form.Item name="input-number" noStyle>
+              <InputNumber 
+                min={1} 
+                max={100} 
+                defaultValue={1} 
+                onChange={(value) => setQuantity(value)} 
+              />
+            </Form.Item>
+          </Form.Item>
+          <Button 
+            className="mr-4" 
+            color="success" 
+            variant="solid"
+            onClick={handleBuyNow}
+          >
+            Buy Now
+          </Button>
+          <Button 
+            color="danger" 
+            variant="solid"
+            onClick={addToCart}
+          >
+            Add to Cart
+          </Button>
+        </div>
+      </Card>
+    </div>
+  </div>
+  <div className="mx-auto mt-7 w-full lg:w-[90%]">
+    <Descriptions title="Item Description" bordered items={items} />
+  </div>
+</div>
+
   );
 }

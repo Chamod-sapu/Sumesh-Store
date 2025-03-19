@@ -44,19 +44,19 @@ function Home() {
     };
 
     return (
-        <div>
+        <div className=' mx-32'>
         <div className='flex flex-col items-center justify-center'>
             <Search
             placeholder="input search text"
             allowClear
-            enterButton={<Button type="primary" style={{ backgroundColor: '#fb933c', borderColor: '#fb933c'}}>Search</Button>}
+            enterButton={<Button type="primary" style={{ backgroundColor: '#ea580c', borderColor: '#ea580c'}}>Search</Button>}
             size="large"
             onSearch={onSearch}
-            style={{ width: 400, marginTop: 20, marginLeft: 20 }}
+            className="w-11/12 md:w-96 lg:w-96 mt-5 mx-auto"
             />
         </div>
 
-        <div>
+        <div className="px-2 sm:px-4 md:px-6 lg:px-10">
             <Swiper
             spaceBetween={30}
             centeredSlides={true}
@@ -64,7 +64,14 @@ function Home() {
             pagination={{ clickable: true }}
             modules={[Autoplay, Pagination, Navigation]}
             className="mySwiper"
-            style={{ height: 500, width: 1200, marginTop: 20, borderRadius: 60 }}
+            style={{ 
+                height: 'auto', 
+                aspectRatio: '16/9',
+                width: '100%', 
+                marginTop: 20, 
+                borderRadius: '20px', 
+                maxHeight: '500px'
+            }}
             >
             <SwiperSlide><img src={Store1} alt="Store 1" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></SwiperSlide>
             <SwiperSlide><img src={Store2} alt="Store 2" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></SwiperSlide>
@@ -78,7 +85,7 @@ function Home() {
             </Swiper>
         </div>
 
-        <div className='mx-40 mt-10 grid grid-cols-4 gap-10'>
+        <div className='mx-2 sm:mx-4 md:mx-8 lg:mx-16 mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-10'>
             {
             item.map((el) => (
                 <ItemCard
