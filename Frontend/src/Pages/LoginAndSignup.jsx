@@ -17,7 +17,7 @@ function LoginAndSignup() {
         setOpen(false);
     };
 
-    const handleCancel = (e) => {
+    const handleCancel = (e) => { 
         console.log(e);
         setOpen(false);
     };
